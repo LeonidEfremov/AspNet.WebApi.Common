@@ -3,7 +3,10 @@
   <PropertyGroup>
     <PackageId>AspNet.WebApi.Common</PackageId>
     <Product>AspNet.WebApi.Common library</Product>
-    <TargetFrameworks>netstandard2.0;net472</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <IsPackable>True</IsPackable>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(OS)' == 'Windows_NT' ">
+    <TargetFrameworks>$(TargetFrameworks);net472</TargetFrameworks>
   </PropertyGroup>
 </Project>
