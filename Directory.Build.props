@@ -21,7 +21,6 @@
     <PackageVersion>$(Version)</PackageVersion>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/LeonidEfremov/aspnet.webapi.common.git</RepositoryUrl>
-    <PackageIconUrl>http://go.microsoft.com/fwlink/?LinkID=288859</PackageIconUrl>
     <PackageLicenseUrl>https://github.com/LeonidEfremov/aspnet.webapi.common/blob/master/LICENSE</PackageLicenseUrl>
     <PackageLicenseType>MIT</PackageLicenseType>
   </PropertyGroup>
