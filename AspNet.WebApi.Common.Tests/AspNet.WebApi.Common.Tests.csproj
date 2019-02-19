@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.2</TargetFrameworks>
@@ -15,6 +15,7 @@
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
     <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="15.9.0" />
+    <PackageReference Include="xunit.runner.utility" Version="2.4.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AspNet.WebApi.Common\AspNet.WebApi.Common.csproj" />
