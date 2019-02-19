@@ -2,7 +2,7 @@
 {
     /// <summary>HTTP headers list</summary>
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    public abstract class ApiHeaders
+    public static class ApiHeaders
     {
         /// <summary>IsAdmin header</summary>
         public const string RequestId = "X-Request-Id";
