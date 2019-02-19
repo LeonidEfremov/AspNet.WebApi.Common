@@ -3,7 +3,6 @@
 namespace AspNet.WebApi.Common.Exceptions
 {
     /// <summary>Exception wrapper for own ApiExceptions.</summary>
-    [Serializable]
     public class ApiException : Exception
     {
         /// <summary>HttpStatusCode for Exception.</summary>
