@@ -1,8 +1,9 @@
 ﻿using AspNet.WebApi.Common.Exceptions;
 using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
-using Newtonsoft.Json;
+using System.Runtime.Serialization.Formatters.Binary;
 using Xunit;
 using Xunit.Asserts.Compare;
 
@@ -85,14 +86,16 @@ namespace AspNet.WebApi.Common.Tests.Exceptions
             {
                 exception = ex;
             }
-            
-            var settings = new JsonSerializerSettings
-            {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            };
 
-            var json = JsonConvert.SerializeObject(exception, settings);
-            var actual = JsonConvert.DeserializeObject<ApiException>(json, settings);
+            var formatter = new BinaryFormatter();
+            ApiException actual;
+
+            using (var ms = new MemoryStream())
+            {
+                formatter.Serialize(ms, exception);
+                ms.Seek(0, SeekOrigin.Begin);
+                actual = (ApiException)formatter.Deserialize(ms);
+            }
 
             DeepAssert.Equal(exception, actual, "StackTrace", "TargetSite");
         }
