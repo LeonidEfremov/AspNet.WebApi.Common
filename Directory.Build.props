@@ -8,7 +8,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationVersion>$(Version)</ApplicationVersion>
-    <VersionPrefix>1.0.7</VersionPrefix>
+    <VersionPrefix>1.0.8</VersionPrefix>
     <VersionSuffix>$(VersionSuffix)</VersionSuffix>
     <Company></Company>
     <Authors>Leonid Efremov</Authors>

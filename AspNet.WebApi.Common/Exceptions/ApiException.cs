@@ -49,9 +49,10 @@ namespace AspNet.WebApi.Common.Exceptions
         /// <inheritdoc />
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
+            base.GetObjectData(info, context);
+
             info.AddValue(nameof(StatusCode), StatusCode, typeof(int));
             info.AddValue(nameof(ReasonCode), ReasonCode, typeof(string));
-            info.AddValue(nameof(Message), ReasonCode, typeof(string));
         }
     }
 }
