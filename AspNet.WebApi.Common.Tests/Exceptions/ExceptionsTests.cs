@@ -2,7 +2,9 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using Newtonsoft.Json;
 using Xunit;
+using Xunit.Asserts.Compare;
 
 namespace AspNet.WebApi.Common.Tests.Exceptions
 {
@@ -68,6 +70,31 @@ namespace AspNet.WebApi.Common.Tests.Exceptions
                 Assert.Equal(message, apiExceptionStatusCode.Message);
                 Assert.Equal(exception.Message, apiExceptionStatusCode.InnerException?.Message);
             }
+        }
+
+        [Fact]
+        public void Serialization()
+        {
+            ApiException exception;
+
+            try
+            {
+                throw new ApiException();
+            }
+            catch (ApiException ex)
+            {
+                exception = ex;
+            }
+            
+            var settings = new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+
+            var json = JsonConvert.SerializeObject(exception, settings);
+            var actual = JsonConvert.DeserializeObject<ApiException>(json, settings);
+
+            DeepAssert.Equal(exception, actual, "StackTrace", "TargetSite");
         }
     }
 }

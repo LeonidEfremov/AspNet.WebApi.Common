@@ -7,7 +7,7 @@
 
 ## About
 
-This assembly contains all common types, helpers, extensions, etc. for AspNet.WebApi assemblies.
+This assembly contains all common types, helpers, extensions, exceptions, etc. for AspNet.WebApi assemblies.
 
 ## Requirements
 

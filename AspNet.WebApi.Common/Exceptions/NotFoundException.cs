@@ -3,6 +3,7 @@
 namespace AspNet.WebApi.Common.Exceptions
 {
     /// <summary>Document not Found API exception (HTTP 404).</summary>
+    [Serializable]
     public class NotFoundException : ApiException
     {
         /// <inheritdoc cref="ApiException.STATUS_CODE" />

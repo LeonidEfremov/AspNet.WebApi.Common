@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/AspNet.WebApi.Common.Tests/AspNet.WebApi.Common.Tests.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

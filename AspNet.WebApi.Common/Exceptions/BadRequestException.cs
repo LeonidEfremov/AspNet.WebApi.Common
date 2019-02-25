@@ -3,6 +3,7 @@
 namespace AspNet.WebApi.Common.Exceptions
 {
     /// <summary>BadRequest API exception (HTTP 400).</summary>
+    [Serializable]
     public class BadRequestException : ApiException
     {
         /// <inheritdoc cref="ApiException.STATUS_CODE" />
