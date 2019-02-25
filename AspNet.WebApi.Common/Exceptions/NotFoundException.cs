@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace AspNet.WebApi.Common.Exceptions
 {
@@ -24,5 +25,8 @@ namespace AspNet.WebApi.Common.Exceptions
         /// <inheritdoc cref="ApiException(int,string,string,System.Exception)" />
         public NotFoundException(int statusCode, string reasonCode, string message = null, Exception innerException = null)
             : base(statusCode, reasonCode, message, innerException) { }
+
+        /// <inheritdoc />
+        public NotFoundException(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
 }
