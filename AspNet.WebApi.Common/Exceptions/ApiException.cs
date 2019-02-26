@@ -1,11 +1,12 @@
-﻿using System;
+﻿using AspNet.WebApi.Common.Exceptions.Interfaces;
+using System;
 using System.Runtime.Serialization;
 
 namespace AspNet.WebApi.Common.Exceptions
 {
     /// <summary>Exception wrapper for own ApiExceptions.</summary>
     [Serializable]
-    public class ApiException : Exception
+    public class ApiException : Exception, IApiException
     {
         /// <summary>HttpStatusCode for Exception.</summary>
         public const int STATUS_CODE = 500;
@@ -13,11 +14,11 @@ namespace AspNet.WebApi.Common.Exceptions
         /// <summary>ReasonCode for Exception.</summary>
         public const string REASON_CODE = "EXCEPTION";
 
-        /// <summary>Gets or sets StatusCode.</summary>
-        public int StatusCode { get; set; }
+        /// <inheritdoc cref="IApiException"/>
+        public int StatusCode { get; }
 
-        /// <summary>Gets or sets ReasonCode.</summary>
-        public string ReasonCode { get; set; }
+        /// <inheritdoc cref="IApiException"/>
+        public string ReasonCode { get; }
 
         /// <inheritdoc/>
         public ApiException() : this(STATUS_CODE, REASON_CODE, string.Empty) { }

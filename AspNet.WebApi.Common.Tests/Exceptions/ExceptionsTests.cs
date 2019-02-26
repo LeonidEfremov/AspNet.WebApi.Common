@@ -1,4 +1,5 @@
 ﻿using AspNet.WebApi.Common.Exceptions;
+using AspNet.WebApi.Common.Exceptions.Interfaces;
 using System;
 using System.IO;
 using System.Linq;
@@ -76,7 +77,7 @@ namespace AspNet.WebApi.Common.Tests.Exceptions
         [Fact]
         public void Serialization()
         {
-            ApiException exception;
+            IApiException exception;
 
             try
             {
@@ -88,13 +89,14 @@ namespace AspNet.WebApi.Common.Tests.Exceptions
             }
 
             var formatter = new BinaryFormatter();
-            ApiException actual;
+
+            IApiException actual;
 
             using (var ms = new MemoryStream())
             {
                 formatter.Serialize(ms, exception);
                 ms.Seek(0, SeekOrigin.Begin);
-                actual = (ApiException)formatter.Deserialize(ms);
+                actual = (IApiException)formatter.Deserialize(ms);
             }
 
             DeepAssert.Equal(exception, actual, "StackTrace", "TargetSite");
