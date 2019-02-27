@@ -45,17 +45,19 @@ after_test:
 
 artifacts:
   - path: '.\.packages\*.nupkg'
+    name: 'nupkg'
 
 deploy:
   - provider: NuGet
     server: https://api.nuget.org/v3/index.json
     api_key: $env:NUGET_APIKEY
     skip_symbols: true
-    artifact: '*.nupkg'
+    artifact: 'nupkg'
 
   - provider: GitHub
     auth_token: $env:GITHUB_TOKEN
-    artifact: '*.nupkg'
+    artifact: 'nupkg'
+    release: $env:APPVEYOR_BUILD_VERSION%
     draft: false
     prerelease: false
     on:
