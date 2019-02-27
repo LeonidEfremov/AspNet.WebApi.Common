@@ -1,6 +1,7 @@
 ﻿using AspNet.WebApi.Common.Exceptions;
 using AspNet.WebApi.Common.Exceptions.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -13,15 +14,16 @@ namespace AspNet.WebApi.Common.Tests.Exceptions
     /// <summary>Exceptions tests.</summary>
     public class ExceptionsTests
     {
+
+        private readonly IEnumerable<Type> _exceptionTypes = from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                                                             from type in assembly.GetTypes()
+                                                             where typeof(ApiException).IsAssignableFrom(type)
+                                                             select type;
+
         /// <summary>Test for all current assembly Exceptions based on <see cref="ApiException"/>.</summary>
         [Fact]
         public void StatusCodes()
         {
-            var exceptions = from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                             from type in assembly.GetTypes()
-                             where typeof(ApiException).IsAssignableFrom(type)
-                             select type;
-
             const int fakeStatusCode = 10;
             const string fakeReasonCode = "FAKE";
             const string message = "test message";
@@ -29,7 +31,7 @@ namespace AspNet.WebApi.Common.Tests.Exceptions
 
             var exception = new ArgumentNullException(innerMessage);
 
-            foreach (var type in exceptions)
+            foreach (var type in _exceptionTypes)
             {
                 var statusCodeField = type.GetField("STATUS_CODE", BindingFlags.Static | BindingFlags.Public);
                 var reasonCodeField = type.GetField("REASON_CODE", BindingFlags.Static | BindingFlags.Public);
@@ -77,29 +79,32 @@ namespace AspNet.WebApi.Common.Tests.Exceptions
         [Fact]
         public void Serialization()
         {
-            IApiException exception;
-
-            try
+            foreach (var type in _exceptionTypes)
             {
-                throw new ApiException();
+                IApiException exception;
+
+                try
+                {
+                    throw (ApiException)Activator.CreateInstance(type);
+                }
+                catch (ApiException ex)
+                {
+                    exception = ex;
+                }
+
+                var formatter = new BinaryFormatter();
+
+                IApiException actual;
+
+                using (var ms = new MemoryStream())
+                {
+                    formatter.Serialize(ms, exception);
+                    ms.Seek(0, SeekOrigin.Begin);
+                    actual = (IApiException)formatter.Deserialize(ms);
+                }
+
+                DeepAssert.Equal(exception, actual, "StackTrace", "TargetSite");
             }
-            catch (ApiException ex)
-            {
-                exception = ex;
-            }
-
-            var formatter = new BinaryFormatter();
-
-            IApiException actual;
-
-            using (var ms = new MemoryStream())
-            {
-                formatter.Serialize(ms, exception);
-                ms.Seek(0, SeekOrigin.Begin);
-                actual = (IApiException)formatter.Deserialize(ms);
-            }
-
-            DeepAssert.Equal(exception, actual, "StackTrace", "TargetSite");
         }
     }
 }
