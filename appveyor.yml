@@ -49,7 +49,6 @@ after_test:
 
 artifacts:
   - path: '.\.packages\*.nupkg'
-  - name: 'nuget package'
 
 deploy:
   - provider: NuGet
