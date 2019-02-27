@@ -33,32 +33,32 @@ build:
   publish_nuget: true
 
 before_build:
-  - dotnet sonarscanner begin /k:"AspNet.WebApi.Common" /v:"%APPVEYOR_BUILD_VERSION%" /o:"%SONAR_ORGANIZATION%" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="%SONAR_LOGIN%" /d:sonar.cs.opencover.reportsPaths="**\coverage.opencover.xml" /d:sonar.coverage.exclusions="**Tests*.cs" /d:sonar.verbose="true"
+  - dotnet sonarscanner begin /k:"AspNet.WebApi.Common" /v:"%APPVEYOR_BUILD_VERSION%" /o:"%SONAR_ORGANIZATION%" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="%SONAR_LOGIN%" /d:sonar.cs.opencover.reportsPaths="**\coverage.opencover.xml" /d:sonar.coverage.exclusions="**Tests*.cs"
 
 build_script:
   - dotnet build
   
 after_build:
-  - dotnet pack
+  - dotnet pack --no-build
 
 test_script:
-  - dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+  - dotnet test --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
 after_test:
   - dotnet sonarscanner end /d:sonar.login="%SONAR_LOGIN%"
 
 artifacts:
-  - path: /.*\.packages\\.*\.nupkg$/
+  - path: '.\.packages\*.nupkg'
 
 deploy:
   - provider: NuGet
     server: https://api.nuget.org/v3/index.json
     api_key: $env:NUGET_APIKEY
     skip_symbols: true
-    artifact: /.*\.packages\\.*\.nupkg$/
+    artifact: '**\*.nupkg'
 
   - provider: GitHub
-    artifact: /.*\.packages\\.*\.nupkg$/
+    artifact: '**\*.nupkg'
     draft: false
     prerelease: false
     on:
