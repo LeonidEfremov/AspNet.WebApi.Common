@@ -17,10 +17,10 @@ install:
   - dotnet tool install --global dotnet-sonarscanner
   - ps: |
       $content = Get-Content -Path Directory.Build.props
-      $regex = new-object System.Text.RegularExpressions.Regex ('()([\d]+.[\d]+.[\d]+)(<\/VersionPrefix>)', [System.Text.RegularExpressions.RegexOptions]::MultiLine)
+      $regex = New-Object System.Text.RegularExpressions.Regex ('()([\d]+.[\d]+.[\d]+)(<\/VersionPrefix>)', [System.Text.RegularExpressions.RegexOptions]::MultiLine)
       $version = $null
       $match = $regex.Match($content)
-      if($match.Success) { $version = $match.groups[2].value }
+      if ( $match.Success ) { $version = $match.groups[2].value }
       $version = "$version-$env:APPVEYOR_BUILD_NUMBER"
   - ps: Update-AppveyorBuild -Version $version
 
@@ -28,12 +28,8 @@ platform: Any CPU
 
 configuration: Release
 
-build:
-  parallel: true
-  publish_nuget: true
-
 before_build:
-  - dotnet sonarscanner begin /k:"AspNet.WebApi.Common" /v:"%APPVEYOR_BUILD_VERSION%" /o:"%SONAR_ORGANIZATION%" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="%SONAR_LOGIN%" /d:sonar.cs.opencover.reportsPaths="**\coverage.opencover.xml" /d:sonar.coverage.exclusions="**Tests*.cs"
+  - dotnet sonarscanner begin /k:"%APPVEYOR_PROJECT_NAME%" /v:"%APPVEYOR_BUILD_VERSION%" /o:"%SONAR_ORGANIZATION%" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="%SONAR_LOGIN%" /d:sonar.cs.opencover.reportsPaths="**\coverage.opencover.xml" /d:sonar.coverage.exclusions="**Tests*.cs"
 
 build_script:
   - dotnet build
@@ -55,10 +51,10 @@ deploy:
     server: https://api.nuget.org/v3/index.json
     api_key: $env:NUGET_APIKEY
     skip_symbols: true
-    artifact: '.\.packages\*.nupkg'
+    artifact: '*.nupkg'
 
   - provider: GitHub
-    artifact: '.\.packages\*.nupkg'
+    artifact: '*.nupkg'
     draft: false
     prerelease: false
     on:
