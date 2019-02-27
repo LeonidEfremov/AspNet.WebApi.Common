@@ -1,4 +1,4 @@
-version: {build}
+version: '{build}'
 
 branches:
   only:
@@ -52,7 +52,7 @@ deploy:
     server: https://api.nuget.org/v3/index.json
     api_key: $env:NUGET_APIKEY
     skip_symbols: true
-    artifact: *.nupkg
+    artifact: /.*\.nupkg/
 
   - provider: GitHub
     artifact: /.*\.nupkg/
