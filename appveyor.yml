@@ -45,17 +45,17 @@ after_test:
   - dotnet sonarscanner end /d:sonar.login="%SONAR_LOGIN%"
 
 artifacts:
-  - path: '.\.packages\*.nupkg'
+  - path: /.*\.packages\\.*\.nupkg$/
 
 deploy:
   - provider: NuGet
     server: https://api.nuget.org/v3/index.json
     api_key: $env:NUGET_APIKEY
     skip_symbols: true
-    artifact: /.*\.nupkg/
+    artifact: /.*\.packages\\.*\.nupkg$/
 
   - provider: GitHub
-    artifact: /.*\.nupkg/
+    artifact: /.*\.packages\\.*\.nupkg$/
     draft: false
     prerelease: false
     on:
