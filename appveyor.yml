@@ -49,16 +49,17 @@ after_test:
 
 artifacts:
   - path: '.\.packages\*.nupkg'
+  - name: 'nuget package'
 
 deploy:
   - provider: NuGet
     server: https://api.nuget.org/v3/index.json
     api_key: $env:NUGET_APIKEY
     skip_symbols: true
-    artifact: '**\*.nupkg'
+    artifact: '.\.packages\*.nupkg'
 
   - provider: GitHub
-    artifact: '**\*.nupkg'
+    artifact: '.\.packages\*.nupkg'
     draft: false
     prerelease: false
     on:
