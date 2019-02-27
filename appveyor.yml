@@ -37,6 +37,9 @@ before_build:
 
 build_script:
   - dotnet build
+  
+after_build:
+  - dotnet pack
 
 test_script:
   - dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
