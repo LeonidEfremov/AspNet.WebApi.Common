@@ -49,7 +49,6 @@ artifacts:
 
 deploy:
   - provider: NuGet
-    server: https://api.nuget.org/v3/index.json
     api_key: $(NUGET_APIKEY)
     skip_symbols: true
     artifact: 'nupkg'
