@@ -32,7 +32,7 @@ before_build:
   - dotnet sonarscanner begin /k:"%APPVEYOR_PROJECT_NAME%" /v:"%APPVEYOR_BUILD_VERSION%" /o:"%SONAR_ORGANIZATION%" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="%SONAR_LOGIN%" /d:sonar.cs.opencover.reportsPaths="**\coverage.opencover.xml" /d:sonar.coverage.exclusions="**Tests*.cs"
 
 build_script:
-  - dotnet build
+  - dotnet build --configuration %CONFIGURATION%
   
 after_build:
   - dotnet pack --no-build
@@ -54,6 +54,7 @@ deploy:
     artifact: '*.nupkg'
 
   - provider: GitHub
+    auth_token: $env:GITHUB_TOKEN
     artifact: '*.nupkg'
     draft: false
     prerelease: false
