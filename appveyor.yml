@@ -57,7 +57,7 @@ deploy:
   - provider: GitHub
     auth_token: $env:GITHUB_TOKEN
     artifact: 'nupkg'
-    release: $env:APPVEYOR_BUILD_VERSION%
+    release: $env:APPVEYOR_BUILD_VERSION
     draft: false
     prerelease: false
     on:
