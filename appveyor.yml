@@ -1,0 +1,62 @@
+version: {build}
+
+branches:
+  only:
+    - master
+
+skip_tags: true
+
+max_jobs: 1
+
+image: Visual Studio 2017
+
+init:
+  - git config --global core.autocrlf input
+
+install:
+  - dotnet tool install --global dotnet-sonarscanner
+  - ps: |
+      $content = Get-Content -Path Directory.Build.props
+      $regex = new-object System.Text.RegularExpressions.Regex ('()([\d]+.[\d]+.[\d]+)(<\/VersionPrefix>)', [System.Text.RegularExpressions.RegexOptions]::MultiLine)
+      $version = $null
+      $match = $regex.Match($content)
+      if($match.Success) { $version = $match.groups[2].value }
+      $version = "$version-$env:APPVEYOR_BUILD_NUMBER"
+  - ps: Update-AppveyorBuild -Version $version
+
+platform: Any CPU
+
+configuration: Release
+
+build:
+  parallel: true
+  publish_nuget: true
+
+before_build:
+  - dotnet sonarscanner begin /k:"AspNet.WebApi.Common" /v:"$version" /o:"$env:SONAR_ORGANIZATION" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="$env:SONAR_LOGIN" /d:sonar.cs.opencover.reportsPaths="**\coverage.opencover.xml" /d:sonar.coverage.exclusions="**Tests*.cs"
+
+build_script:
+  - dotnet build
+
+test_script:
+  - dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+
+after_test:
+  - dotnet sonarscanner end /d:sonar.login="$env:SONAR_LOGIN"
+
+artifacts:
+  - path: '.\.packages\*.nupkg'
+
+deploy:
+  - provider: NuGet
+    server: https://api.nuget.org/v3/index.json
+    api_key: $env:NUGET_APIKEY
+    skip_symbols: true
+    artifact: *.nupkg
+
+  - provider: GitHub
+    artifact: /.*\.nupkg/
+    draft: false
+    prerelease: false
+    on:
+      branch: master
