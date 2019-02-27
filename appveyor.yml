@@ -33,7 +33,7 @@ build:
   publish_nuget: true
 
 before_build:
-  - dotnet sonarscanner begin /k:"AspNet.WebApi.Common" /v:"$version" /d:sonar.organization="$env:SONAR_ORGANIZATION" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="$env:SONAR_LOGIN" /d:sonar.cs.opencover.reportsPaths="**\coverage.opencover.xml" /d:sonar.coverage.exclusions="**Tests*.cs" /d:sonar.verbose=true 
+  - dotnet sonarscanner begin /k:"AspNet.WebApi.Common" /v:"%APPVEYOR_BUILD_VERSION%" /o:"%SONAR_ORGANIZATION%" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="%SONAR_LOGIN%" /d:sonar.cs.opencover.reportsPaths="**\coverage.opencover.xml" /d:sonar.coverage.exclusions="**Tests*.cs" /d:sonar.verbose="true"
 
 build_script:
   - dotnet build
@@ -42,7 +42,7 @@ test_script:
   - dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
 after_test:
-  - dotnet sonarscanner end /d:sonar.login="$env:SONAR_LOGIN"
+  - dotnet sonarscanner end /d:sonar.login="%SONAR_LOGIN%"
 
 artifacts:
   - path: '.\.packages\*.nupkg'
