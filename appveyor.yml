@@ -47,7 +47,7 @@ artifacts:
   - path: '.\.packages\*.nupkg'
     name: 'nupkg'
 
-#deploy:
+deploy:
 #  - provider: NuGet
 #    server: https://api.nuget.org/v3/index.json
 #    api_key: $env:NUGET_APIKEY
