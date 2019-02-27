@@ -27,6 +27,6 @@ namespace AspNet.WebApi.Common.Exceptions
             : base(statusCode, reasonCode, message, innerException) { }
 
         /// <inheritdoc />
-        public BadRequestException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        protected BadRequestException(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
 }

@@ -27,6 +27,6 @@ namespace AspNet.WebApi.Common.Exceptions
             : base(statusCode, reasonCode, message, innerException) { }
 
         /// <inheritdoc />
-        public NotFoundException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        protected NotFoundException(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
 }

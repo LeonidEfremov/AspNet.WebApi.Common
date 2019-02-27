@@ -48,11 +48,11 @@ artifacts:
     name: 'nupkg'
 
 deploy:
-#  - provider: NuGet
-#    server: https://api.nuget.org/v3/index.json
-#    api_key: $env:NUGET_APIKEY
-#    skip_symbols: true
-#    artifact: 'nupkg'
+  - provider: NuGet
+    server: https://api.nuget.org/v3/index.json
+    api_key: $(NUGET_APIKEY)
+    skip_symbols: true
+    artifact: 'nupkg'
 
   - provider: GitHub
     auth_token: $(GITHUB_TOKEN)

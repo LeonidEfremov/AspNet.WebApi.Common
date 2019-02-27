@@ -41,7 +41,7 @@ namespace AspNet.WebApi.Common.Exceptions
         }
 
         /// <inheritdoc />
-        public ApiException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected ApiException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             StatusCode = info.GetInt32(nameof(StatusCode));
             ReasonCode = info.GetString(nameof(ReasonCode));
