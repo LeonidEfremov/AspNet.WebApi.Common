@@ -13,6 +13,8 @@ max_jobs: 1
 
 image: Visual Studio 2017
 
+shallow_clone: true
+
 init:
   - git config --global core.autocrlf input
 
@@ -64,3 +66,15 @@ deploy:
     prerelease: false
     on:
       branch: master
+
+for:
+  -
+    branches:
+      except:
+        - master
+
+    before_build:
+
+    after_test:
+
+    deploy: off
