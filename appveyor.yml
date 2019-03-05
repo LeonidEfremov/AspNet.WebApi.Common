@@ -38,7 +38,7 @@ before_build:
       /o:"%SONAR_ORGANIZATION%" 
       /d:sonar.host.url="https://sonarcloud.io" 
       /d:sonar.login="%SONAR_LOGIN%" 
-      /d:sonar.branch.name="%%" 
+      /d:sonar.branch.name="%APPVEYOR_REPO_BRANCH%" 
       /d:sonar.cs.opencover.reportsPaths="**\coverage.opencover.xml" 
       /d:sonar.coverage.exclusions="**Tests*.cs"
 
