@@ -32,7 +32,15 @@ install:
 configuration: Release
 
 before_build:
-  - dotnet sonarscanner begin /k:"%APPVEYOR_PROJECT_NAME%" /v:"%APPVEYOR_BUILD_VERSION%" /o:"%SONAR_ORGANIZATION%" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="%SONAR_LOGIN%" /d:sonar.cs.opencover.reportsPaths="**\coverage.opencover.xml" /d:sonar.coverage.exclusions="**Tests*.cs"
+  - dotnet sonarscanner begin 
+      /k:"%APPVEYOR_PROJECT_NAME%" 
+      /v:"%APPVEYOR_BUILD_VERSION%" 
+      /o:"%SONAR_ORGANIZATION%" 
+      /d:sonar.host.url="https://sonarcloud.io" 
+      /d:sonar.login="%SONAR_LOGIN%" 
+      /d:sonar.branch.name="%%" 
+      /d:sonar.cs.opencover.reportsPaths="**\coverage.opencover.xml" 
+      /d:sonar.coverage.exclusions="**Tests*.cs"
 
 build_script:
   - dotnet build --configuration %CONFIGURATION%
@@ -72,9 +80,5 @@ for:
     branches:
       except:
         - master
-
-    before_build: off
-
-    after_test: off
 
     deploy: off
