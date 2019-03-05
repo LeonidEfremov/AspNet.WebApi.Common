@@ -73,8 +73,8 @@ for:
       except:
         - master
 
-    before_build:
+    before_build: off
 
-    after_test:
+    after_test: off
 
     deploy: off
