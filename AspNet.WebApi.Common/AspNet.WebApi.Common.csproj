@@ -3,7 +3,7 @@
   <PropertyGroup>
     <PackageId>AspNet.WebApi.Common</PackageId>
     <Product>AspNet.WebApi.Common library</Product>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1</TargetFrameworks>
     <IsPackable>True</IsPackable>
   </PropertyGroup>
 </Project>
