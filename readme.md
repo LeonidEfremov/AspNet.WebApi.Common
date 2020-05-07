@@ -12,4 +12,4 @@ This assembly contains all common types, helpers, extensions, exceptions, etc. f
 
 ## Requirements
 
-Only [.NET Core SDK](http://dot.net/) (2.2.0 and above) required.
+Only [.NET Core SDK](http://dot.net/) (3.1.0 and above) required.
