@@ -3,7 +3,8 @@
   <PropertyGroup>
     <PackageId>AspNet.WebApi.Common</PackageId>
     <Product>AspNet.WebApi.Common library</Product>
-    <TargetFrameworks>netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;net5.0</TargetFrameworks>
     <IsPackable>True</IsPackable>
+    <UserSecretsId>c9616ca5-eec0-49bd-9c08-e3b848e06d5b</UserSecretsId>
   </PropertyGroup>
 </Project>
