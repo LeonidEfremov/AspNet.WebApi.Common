@@ -197,4 +197,5 @@ ModelManifest.xml
 *.nunit.xml
 .packages/
 .sonarqube/
-coverage.opencover.xml
+coverage.*.opencover.xml
+
