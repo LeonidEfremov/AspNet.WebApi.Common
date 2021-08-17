@@ -38,7 +38,8 @@ before_build:
       /version:"$env:APPVEYOR_BUILD_VERSION" 
       /d:sonar.login="$env:SONAR_LOGIN"
       /d:sonar.host.url="https://sonarcloud.io"
-      /s:"./sonar-project.properties"
+      /d:sonar.verbose="true"
+      /s:sonar-project.properties
     }'
 
 build_script:
