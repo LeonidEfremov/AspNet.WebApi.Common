@@ -35,6 +35,7 @@ before_build:
   - ps: 'if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { &
       dotnet sonarscanner begin
       /version:"$env:APPVEYOR_BUILD_VERSION" 
+      /d:sonar.verbose=true
       /d:sonar.login="$env:SONAR_LOGIN"
       /s:sonar-project.properties
     }'
