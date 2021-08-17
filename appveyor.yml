@@ -32,12 +32,11 @@ install:
 configuration: Release
 
 before_build:
-  - ps: 'Get-Content ./sonar-project.properties'
   - ps: 'if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { &
       dotnet sonarscanner begin 
       /version:"$env:APPVEYOR_BUILD_VERSION" 
       /d:sonar.login="$env:SONAR_LOGIN"
-      /s:"$env:APPVEYOR_BUILD_FOLDER/sonar-project.properties"
+      /s:$env:APPVEYOR_BUILD_FOLDER/sonar-project.properties
     }'
 
 build_script:
