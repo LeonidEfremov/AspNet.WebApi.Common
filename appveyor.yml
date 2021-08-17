@@ -32,6 +32,7 @@ install:
 configuration: Release
 
 before_build:
+  - ps: 'gci env:* | sort-object name'
   - ps: 'if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { &
       dotnet sonarscanner begin 
       /k:"$env:APPVEYOR_PROJECT_NAME" 
