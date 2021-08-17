@@ -34,18 +34,13 @@ configuration: Release
 before_build:
   - ps: 'if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { &
       dotnet sonarscanner begin 
-      /k:"$env:APPVEYOR_PROJECT_NAME" 
-      /v:"$env:APPVEYOR_BUILD_VERSION" 
-      /o:"$env:SONAR_ORGANIZATION" 
-      /d:sonar.host.url="https://sonarcloud.io" 
+      /key:"$env:APPVEYOR_PROJECT_NAME" 
+      /version:"$env:APPVEYOR_BUILD_VERSION" 
       /d:sonar.login="$env:SONAR_LOGIN" 
-      /d:sonar.cs.opencover.reportsPaths="**\coverage.opencover.xml" 
-      /d:sonar.coverage.exclusions="**Tests*.cs"
-      /d:sonar.verbose=true
     }'
 
 build_script:
-  - dotnet build -p:SonarQubeTargetsImported=true # --configuration %CONFIGURATION%
+  - dotnet build # --configuration %CONFIGURATION%
 
 after_build:
   - dotnet pack --no-build
