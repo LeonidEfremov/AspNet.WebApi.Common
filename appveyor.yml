@@ -33,17 +33,15 @@ configuration: Release
 
 before_build:
   - ps: $env:JAVA_HOME=$env:JAVA_HOME_15_X64
-  - ps: gci env:* | sort-object name
   - ps: 'if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { &
       dotnet sonarscanner begin 
       /k:"$env:APPVEYOR_PROJECT_NAME" 
       /v:"$env:APPVEYOR_BUILD_VERSION" 
       /o:"$env:SONAR_ORGANIZATION" 
-      /d:wrapper.java.command="$env:JAVA_HOME_15_X64/bin/java"
       /d:sonar.host.url="https://sonarcloud.io" 
       /d:sonar.login="$env:SONAR_LOGIN" 
-      /d:sonar.cs.opencover.reportsPaths="**\coverage.opencover.xml" 
-      /d:sonar.coverage.exclusions="*Tests*.cs"
+      /d:sonar.cs.opencover.reportsPaths="**\coverage.*.opencover.xml" 
+      /d:sonar.coverage.exclusions="**Tests*.cs"
       /d:sonar.language=csharp
       /d:sonar.verbose=false
     }'
