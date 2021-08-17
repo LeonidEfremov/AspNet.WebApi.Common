@@ -32,7 +32,7 @@ install:
 configuration: Release
 
 before_build:
-  - ps: 'ls'
+  - ps: 'dir'
   - ps: 'if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { &
       dotnet sonarscanner begin
       /version:"$env:APPVEYOR_BUILD_VERSION" 
