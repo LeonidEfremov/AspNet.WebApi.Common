@@ -35,11 +35,8 @@ before_build:
   - ps: 'Get-Content ./sonar-project.properties'
   - ps: 'if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { &
       dotnet sonarscanner begin 
-      /key:"$env:APPVEYOR_PROJECT_NAME" 
       /version:"$env:APPVEYOR_BUILD_VERSION" 
       /d:sonar.login="$env:SONAR_LOGIN"
-      /d:sonar.host.url="https://sonarcloud.io"
-      /d:sonar.verbose="true"
       /s:"./sonar-project.properties"
     }'
 
