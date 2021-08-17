@@ -13,7 +13,7 @@ max_jobs: 1
 
 image: Ubuntu
 
-shallow_clone: true
+shallow_clone: false
 
 init:
   - git config --global core.autocrlf input
@@ -42,7 +42,7 @@ before_build:
       /d:sonar.cs.opencover.reportsPaths="**\coverage.opencover.xml" 
       /d:sonar.coverage.exclusions="*Tests*.cs"
       /d:sonar.language=csharp
-      /d:sonar.verbose=true
+      /d:sonar.verbose=false
     }'
 
 build_script:
