@@ -19,7 +19,7 @@ init:
   - git config --global core.autocrlf input
 
 install:
-  - dotnet tool install --global dotnet-sonarscanner
+  - dotnet tool install --global dotnet-sonarscanner --version 5.2.2
   - ps: |
       $content = Get-Content -Path Directory.Build.props
       $regex = New-Object System.Text.RegularExpressions.Regex ('()([\d]+.[\d]+.[\d]+)(<\/VersionPrefix>)', [System.Text.RegularExpressions.RegexOptions]::MultiLine)
