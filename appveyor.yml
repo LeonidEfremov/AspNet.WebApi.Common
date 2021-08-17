@@ -31,10 +31,8 @@ install:
 
 configuration: Release
 
-environment:
-  JAVA_HOME: $(JAVA_HOME_15_X64)
-
 before_build:
+  - set: JAVA_HOME=$(JAVA_HOME_15_X64)
   - ps: 'gci env:* | sort-object name'
   - ps: 'if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { &
       dotnet sonarscanner begin 
