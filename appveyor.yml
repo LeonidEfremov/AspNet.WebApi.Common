@@ -41,6 +41,7 @@ before_build:
       /d:sonar.login="$env:SONAR_LOGIN" 
       /d:sonar.cs.opencover.reportsPaths="**\coverage.opencover.xml" 
       /d:sonar.coverage.exclusions="**Tests*.cs"
+      /d:sonar.verbose=true
     }'
 
 build_script:
