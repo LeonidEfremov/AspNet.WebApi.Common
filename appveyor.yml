@@ -40,7 +40,7 @@ before_build:
       /d:sonar.login="$env:SONAR_LOGIN"
       /d:sonar.host.url="https://sonarcloud.io"
       /d:sonar.verbose="true"
-      /s:sonar-project.properties
+      /s:"./sonar-project.properties"
     }'
 
 build_script:
