@@ -36,7 +36,6 @@ before_build:
       dotnet sonarscanner begin 
       /version:"$env:APPVEYOR_BUILD_VERSION" 
       /d:sonar.login="$env:SONAR_LOGIN"
-      /s:$env:APPVEYOR_BUILD_FOLDER/sonar-project.properties
     }'
 
 build_script:
