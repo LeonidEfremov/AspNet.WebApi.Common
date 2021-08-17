@@ -37,7 +37,7 @@ before_build:
       /key:"$env:APPVEYOR_PROJECT_NAME" 
       /version:"$env:APPVEYOR_BUILD_VERSION" 
       /d:sonar.login="$env:SONAR_LOGIN"
-      /s:sonar-project.properties
+      /s:"sonar-project.properties"
     }'
 
 build_script:
