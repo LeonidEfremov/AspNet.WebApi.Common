@@ -34,20 +34,18 @@ configuration: Release
 before_build:
   - ps: $env:JAVA_HOME=$env:JAVA_HOME_15_X64
   - ps: 'if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { &
-      dotnet sonarscanner begin 
-      /k:"$env:APPVEYOR_PROJECT_NAME" 
-      /v:"$env:APPVEYOR_BUILD_VERSION" 
-      /o:"$env:SONAR_ORGANIZATION" 
-      /d:sonar.host.url="https://sonarcloud.io" 
-      /d:sonar.login="$env:SONAR_LOGIN" 
-      /d:sonar.cs.opencover.reportsPaths="**\coverage.*.opencover.xml" 
+      dotnet sonarscanner begin
+      /k:"$env:APPVEYOR_PROJECT_NAME"
+      /v:"$env:APPVEYOR_BUILD_VERSION"
+      /o:"$env:SONAR_ORGANIZATION"
+      /d:sonar.host.url="https://sonarcloud.io"
+      /d:sonar.login="$env:SONAR_LOGIN"
+      /d:sonar.cs.opencover.reportsPaths="**\coverage.*.opencover.xml"
       /d:sonar.coverage.exclusions="**Tests*.cs"
-      /d:sonar.language=csharp
-      /d:sonar.verbose=false
-    }'
+     }'
 
 build_script:
-  - dotnet build # --configuration %CONFIGURATION%
+  - dotnet build
 
 after_build:
   - dotnet pack --no-build
@@ -56,9 +54,9 @@ test_script:
   - dotnet test --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:Exclude=[xunit*]*
 
 after_test:
-  - ps: 'if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { & 
+  - ps: 'if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { &
       dotnet sonarscanner end /d:sonar.login="$env:SONAR_LOGIN"
-    }'
+      }'
 artifacts:
   - path: '.\.packages\*.nupkg'
     name: 'nupkg'
