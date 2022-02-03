@@ -1,4 +1,4 @@
-name: .NET
+name: build ant test
 on:
   push:
     branches: [master]
@@ -21,3 +21,8 @@ jobs:
         run: dotnet test --no-build --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:Exclude=[xunit*]*
       - name: Create the package
         run: dotnet pack --configuration Release
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: package
+          path: .packages/*.nupkg
