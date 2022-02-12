@@ -20,7 +20,7 @@
     <PackageVersion>$(Version)</PackageVersion>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/LeonidEfremov/aspnet.webapi.common.git</RepositoryUrl>
-    <PackageLicenseUrl>https://github.com/LeonidEfremov/aspnet.webapi.common/blob/master/license.md</PackageLicenseUrl>
+    <PackageLicense>https://github.com/LeonidEfremov/aspnet.webapi.common/blob/master/license.md</PackageLicense>
     <PackageLicenseType>MIT</PackageLicenseType>
   </PropertyGroup>
 </Project>
