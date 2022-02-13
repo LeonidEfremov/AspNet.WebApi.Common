@@ -28,4 +28,4 @@ jobs:
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1.28
         with:
-          files: **/coverage.opencover.xml
+          files: '**/coverage.opencover.xml'
