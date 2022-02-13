@@ -201,3 +201,4 @@ ModelManifest.xml
 coverage.*.xml
 coverage.json
 
+*.trx

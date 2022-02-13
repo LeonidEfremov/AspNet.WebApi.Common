@@ -6,6 +6,7 @@ on:
     branches: [master]
 jobs:
   build:
+    name: Build and Test
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -25,7 +26,9 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           path: .packages/*.nupkg
-      - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v1.28
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v2
+        if: success() || failure()
         with:
-          files: '**/coverage.opencover.xml'
+          path: '.testresults/*.trx'
+
