@@ -198,5 +198,6 @@ ModelManifest.xml
 .packages/
 .sonarqube/
 .tests/
-coverage.*.opencover.xml
+coverage.*.xml
 coverage.json
+
