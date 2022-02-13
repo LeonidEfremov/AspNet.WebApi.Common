@@ -15,10 +15,10 @@
   <ItemGroup>
     <ProjectReference Include="..\AspNet.WebApi.Common\AspNet.WebApi.Common.csproj" />
   </ItemGroup>
-  <Target Name="GenerateHtmlCoverageReport" AfterTargets="GenerateCoverageResultAfterTest">
+  <Target Name="GenerateHtmlCoverageReport" Condition="@(CollectCoverage)=='true'" AfterTargets="GenerateCoverageResultAfterTest">
     <ItemGroup>
-      <CoverageFiles Include="coverage.json" />
+      <CoverageFiles Include="coverage.opencover.xml" />
     </ItemGroup>
-    <ReportGenerator ReportFiles="@(CoverageFiles)" TargetDirectory="../.tests" />
+    <ReportGenerator ReportFiles="@(CoverageFiles)" TargetDirectory="../.tests"  />
   </Target>
 </Project>
