@@ -8,7 +8,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <VSTestLogger>trx%3bLogFileName=$(MSBuildProjectName).trx</VSTestLogger>
-    <VSTestResultsDirectory>$(MSBuildThisFileDirectory)/.testresults/$(TargetFramework)</VSTestResultsDirectory>
+    <VSTestResultsDirectory>$(MSBuildThisFileDirectory).testresults/$(TargetFramework)</VSTestResultsDirectory>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationVersion>$(Version)</ApplicationVersion>
