@@ -25,4 +25,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           path: .packages/*.nupkg
-          path: .tests/*.md
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1.28
+        with:
+          files: .tests/*.md
