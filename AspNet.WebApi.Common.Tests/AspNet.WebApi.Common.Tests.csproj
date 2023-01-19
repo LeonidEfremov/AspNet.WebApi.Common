@@ -10,7 +10,7 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5" />
     <PackageReference Include="xUnit.Asserts.Compare" Version="1.0.0.5" />
     <PackageReference Include="coverlet.msbuild" Version="3.1.2" />
-    <PackageReference Include="ReportGenerator" Version="5.1.9" />
+    <PackageReference Include="ReportGenerator" Version="5.1.14" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AspNet.WebApi.Common\AspNet.WebApi.Common.csproj" />
